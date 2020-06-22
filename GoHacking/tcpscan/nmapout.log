@@ -1,0 +1,97 @@
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 08:00:27:23:ff:90  txqueuelen 1000  (Ethernet)
+        RX packets 18  bytes 2881 (2.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth1: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 08:00:27:9c:03:53  txqueuelen 1000  (Ethernet)
+        RX packets 18  bytes 2881 (2.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth2: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.0.2.5  netmask 255.255.255.0  broadcast 10.0.2.255
+        inet6 fe80::a00:27ff:fe8e:af96  prefixlen 64  scopeid 0x20<link>
+        ether 08:00:27:8e:af:96  txqueuelen 1000  (Ethernet)
+        RX packets 7  bytes 1800 (1.7 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 30  bytes 2773 (2.7 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+eth3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        ether 08:00:27:cd:c0:e7  txqueuelen 1000  (Ethernet)
+        RX packets 18  bytes 2881 (2.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>                                                                                                                                       
+        loop  txqueuelen 1000  (Local Loopback)                                                                                                                                            
+        RX packets 20  bytes 952 (952.0 B)                                                                                                                                                 
+        RX errors 0  dropped 0  overruns 0  frame 0                                                                                                                                        
+        TX packets 20  bytes 952 (952.0 B)                                                                                                                                                 
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0                                                                                                                         
+                                                                                                                                                                                           
+kali@kali:~$ pin 10.0.2.
+bash: pin: command not found
+kali@kali:~$ pin 10.0.2.4
+bash: pin: command not found
+kali@kali:~$ ping 10.0.2.4
+PING 10.0.2.4 (10.0.2.4) 56(84) bytes of data.
+64 bytes from 10.0.2.4: icmp_seq=1 ttl=64 time=0.615 ms
+64 bytes from 10.0.2.4: icmp_seq=2 ttl=64 time=0.268 ms
+64 bytes from 10.0.2.4: icmp_seq=3 ttl=64 time=0.293 ms
+^C
+--- 10.0.2.4 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2037ms
+rtt min/avg/max/mdev = 0.268/0.392/0.615/0.158 ms
+kali@kali:~$ nmap -A 10.0.2.4
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-14 14:47 EDT
+Nmap scan report for 10.0.2.4
+Host is up (0.00045s latency).
+Not shown: 977 closed ports
+PORT     STATE SERVICE     VERSION
+21/tcp   open  ftp         vsftpd 2.3.4
+|_ftp-anon: Anonymous FTP login allowed (FTP code 230)
+| ftp-syst: 
+|   STAT: 
+| FTP server status:
+|      Connected to 10.0.2.5
+|      Logged in as ftp
+|      TYPE: ASCII
+|      No session bandwidth limit
+|      Session timeout in seconds is 300
+|      Control connection is plain text
+|      Data connections will be plain text
+|      vsFTPd 2.3.4 - secure, fast, stable
+|_End of status
+22/tcp   open  ssh         OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
+| ssh-hostkey: 
+|   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)
+|_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)
+23/tcp   open  telnet      Linux telnetd
+25/tcp   open  smtp        Postfix smtpd
+|_smtp-commands: metasploitable.localdomain, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+|_ssl-date: 2020-06-14T18:47:31+00:00; +1s from scanner time.
+| sslv2: 
+|   SSLv2 supported
+|   ciphers: 
+|     SSL2_RC2_128_CBC_EXPORT40_WITH_MD5
+|     SSL2_DES_192_EDE3_CBC_WITH_MD5
+|     SSL2_RC4_128_WITH_MD5
+|     SSL2_RC4_128_EXPORT40_WITH_MD5
+|     SSL2_RC2_128_CBC_WITH_MD5
+|_    SSL2_DES_64_CBC_WITH_MD5
+53/tcp   open  domain      ISC BIND 9.4.2
+| dns-nsid: 
+|_  bind.version: 9.4.2
+80/tcp   open  http        Apache httpd 2.2.8 ((Ubuntu) DAV/2)
+|_http-server-header: Apache/2.2.8 (Ubuntu) DAV/2
+|_http-title: Metasploitable2 - Linux
+111/tcp  open  rpcbind     2 (RPC #100000)
+
