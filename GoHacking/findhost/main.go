@@ -36,7 +36,7 @@ func main() {
 	}
 
 	for _, host := range results.Hosts {
-		if len(host.Ports) == 0 {
+	
 			if len(host.Ports) == 0 || len(host.Addresses) == 0 {
 				continue
 			}
@@ -51,7 +51,7 @@ func main() {
 				fmt.Printf("\t Port %d %s %s %s\n", port.ID, port.Protocol, port.State, port.Service.Name)
 			}
 
-		}
+
 	}
 
 }
