@@ -95,7 +95,7 @@ Interface: 192.168.221.128 --- 0x7
 
 ## Spoof Router
 
-```arpspoof -i eth0 -t 192.168.221.2 192.168.221.128```
+```arpspoof -i eth0 -t 192.168.221.2 192.168.221.133```
 
 ## Wireshark capture from Kali machine
 

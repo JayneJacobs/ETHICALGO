@@ -3,6 +3,8 @@ package main
 import (
 	"GoHacking/hackerserver/core/executecommandwin"
 	"GoHacking/hackerserver/core/handleconnection"
+	"GoHacking/hackerserver/core/move"
+	"GoHacking/hackerserver/upload"
 	"bufio"
 	"encoding/gob"
 	"fmt"
@@ -12,7 +14,7 @@ import (
 	"time"
 )
 
-// Data is teh connection data
+// Data is the connection data
 type Data struct {
 	Name string
 	ID   int
@@ -22,7 +24,9 @@ type Data struct {
 func options() {
 	fmt.Println("[1] ExecuteCommands")
 	fmt.Println("")
-	fmt.Println("[2] Exit")
+	fmt.Println("[2] Navigate Remote system")
+	fmt.Println("[3] Upload file")
+	fmt.Println("[99] Exit")
 }
 
 // DisplayError prints an erroDisplayError
@@ -56,7 +60,7 @@ func main() {
 
 	for loopControl {
 		options()
-		fmt.Printf("[+] Enter Options")
+		fmt.Printf("[+] Enter Options \n")
 		userinputraw, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Println(err)
@@ -72,6 +76,14 @@ func main() {
 			if err != nil {
 				DisplayError(err)
 			}
+		case "2":
+			fmt.Println("[+] Navigate Remote File system")
+			err = move.Navigate(connection)
+			DisplayError(err)
+		case "3":
+			fmt.Println("[+] Upload File")
+			err = upload.FiletoRemote(connection)
+			DisplayError(err)
 		case "99":
 			fmt.Println("[+] Exiting")
 			loopControl = false
